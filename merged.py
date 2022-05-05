@@ -1,4 +1,4 @@
-# Merging RNN model and communication with thingsboard
+# Merging RNN model and communication with ThingsBoard
 
 # Core Keras libraries
 from keras.models import Sequential
@@ -158,7 +158,6 @@ def prediction():
 
 # ========================================================================
 def comm(pred_result):
-# mine: show prediction only
     for i in (pred_result):
         ACCESS_TOKEN = 'XYEkR5gMNEETUOpnxx6B'                 #Token of your device
         broker = "demo.thingsboard.io"                        #host name
@@ -179,41 +178,6 @@ def comm(pred_result):
         print("Please check LATEST TELEMETRY field of your device")
         print(payload)
         time.sleep(5)
-
-    ####################################################################################
-    '''
-    # showing both predicted values and real values
-    ACCESS_TOKEN = 'XYEkR5gMNEETUOpnxx6B'  # Token of your device
-    broker = "demo.thingsboard.io"  # host name
-    port = 1883
-    dataset = pd.read_csv("nox.csv")
-    dataset = dataset['NOx']
-
-    for i in range(0, len(dataset), 5):
-        client1 = paho.Client("control1")  # assign function to callback
-        client1.username_pw_set(ACCESS_TOKEN)  # access token from thingsboard device
-        client1.connect(broker, port, keepalive=60)
-
-        # show real values
-        for j in range(0, 5, 1):
-            a = str(dataset[i + j])
-            payload1 = "{"
-            payload1 += "\"realValue\":" + a
-            payload1 += "}"
-            ret = client1.publish("v1/devices/me/telemetry", payload1)
-
-    # show predicted values
-    b = str(20 + i)
-    payload = "{"
-    payload += "\"prediction\":" + a
-    payload += "}"
-    ret = client1.publish("v1/devices/me/telemetry", payload)  # topic:v1/devices/me/telemetry
-
-    # print info in interpreter
-    print("Please check LATEST TELEMETRY field of your device")
-    print(payload)
-    time.sleep(10)
-    '''
 # ================================================================================================
 
 if __name__ == "__main__":
